@@ -21,7 +21,7 @@ public class HashTable<K, V> implements HashTableInterface<K, V> {
      * DO NOT CHANGE THIS NUMBER.
      * 
      * This is the constant determining what size you will initialize your
-     * table array to.
+     * table array to. Make
      */
     private static final int INITIAL_CAPACITY = 11;
     /**
