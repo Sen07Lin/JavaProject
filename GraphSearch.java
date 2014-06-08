@@ -6,8 +6,6 @@ import java.util.Set;
 /**
  * @author Sen lin   
  * add somethingg
- * asdasdasd
- * asdasd
  */
 public class GraphSearch {
     /**
