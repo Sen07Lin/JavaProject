@@ -1,0 +1,87 @@
+import java.util.Arrays;
+import java.util.Collection;
+
+
+public class MyDynamicArray<T> implements DynamicArrayInterface<T> {
+	
+	//Add instance variables here, they must be private
+	private T[] items;
+	private int count;
+	@Override
+	public void add(T toAdd) {
+		if (!contains(toAdd)) {
+            if (toAdd != null) {
+                if (count < this.items.length) {
+                    items[count] = toAdd;
+                    count++;
+                } else {
+                	 //[] newItems = new T[items.length * 2];
+                    items = Arrays.copyOf(items, items.length * 2);
+                    items[count] = toAdd;
+                    count++;
+                }
+            }
+        }
+	}
+
+	@Override
+	public void addAll(Collection<T> collection) {
+		// TODO Auto-generated method stub
+		if (!collection.isEmpty()) {
+            for (T element : collection) {
+                add(element);
+                System.out.println("HI");
+            }
+        }
+		
+	}
+
+	@Override
+	public T remove(T toRemove) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T remove(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public T get(int index) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean contains(T obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public T[] toArray(){
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isEmpty() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void clear() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int size() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

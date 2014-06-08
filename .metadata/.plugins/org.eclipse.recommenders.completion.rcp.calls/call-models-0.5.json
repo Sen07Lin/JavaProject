@@ -1,0 +1,62 @@
+{
+  "C:\\Program Files\\Java\\jre7\\lib\\rt.jar": {
+    "coordinate": "jre:jre:zip:call:1.0.0",
+    "location": "C:\\Program Files\\Java\\jre7\\lib\\rt.jar",
+    "status": "RESOLVED"
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW1_1331\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW1_1331\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW1_1331\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW3_1332\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW3_1332\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW3_1332\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW2_1332\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW2_1332\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW2_1332\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW4_1332\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW4_1332\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW4_1332\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\Exam4_1331\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\Exam4_1331\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\Exam4_1331\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW5_1332\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW5_1332\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW5_1332\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\AVLTree\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\AVLTree\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\AVLTree\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HashTable\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HashTable\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HashTable\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW8_SORTING\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\HW8_SORTING\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\HW8_SORTING\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\Graph\\Graph\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\Graph\\Graph\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\Graph\\Graph\\src\u0027. Skipped."
+  },
+  "C:\\Users\\Sen\\Desktop\\JavaProjects\\Homework10_String_Searching\\src": {
+    "location": "C:\\Users\\Sen\\Desktop\\JavaProjects\\Homework10_String_Searching\\src",
+    "status": "UNRESOLVED",
+    "error": "No class path info available for \u0027C:\\Users\\Sen\\Desktop\\JavaProjects\\Homework10_String_Searching\\src\u0027. Skipped."
+  }
+}

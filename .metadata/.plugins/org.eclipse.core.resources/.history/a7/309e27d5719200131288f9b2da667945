@@ -1,0 +1,285 @@
+import java.util.Iterator;
+/**
+ * This is a Doubly LinkedList that has both a head an tail pointer.
+ */
+public class DoublyLinkedList<T> implements LinkedListInterface<T>, Iterable<T> {
+    private Node<T> head;
+    private Node<T> tail;
+    private int size;
+    private class MyIterator<E> implements Iterator<E> {
+        private Node<T> current = head;
+        @Override
+        public boolean hasNext() {
+            if (current != null) {
+                return true;
+            }
+            return false;
+        }
+        @Override
+        public E next() {
+            if (!hasNext()) {
+                throw new java.util.NoSuchElementException();
+            }
+            @SuppressWarnings("unchecked")
+            E result = (E) current.getData();
+            current = current.getNext();
+            return result;
+        }
+        @Override
+        public void remove() {
+        }
+    } // end of inner class
+    @Override
+    public boolean add(int index, T data) {
+        if (data != null){
+            size ++;
+            if (index == 0){
+                addFront(data);
+            } else if(index == size - 1){
+                addBack(data);
+            } else {
+                Node<T> newNode = new Node<T>(data);
+                Node<T> cur = getHead();
+                for (int i = 1; i< index; i++){
+                    cur = cur.getNext();
+                }
+                // System.out.println("locate"+cur.getPrev().getData()+ "index");
+
+                newNode.setNext(cur);
+                newNode.setPre(cur.getPrev());
+                cur.setPre(newNode);
+                // System.out.println(newNode.getNext().getData());
+            }
+        }
+        return data != null;
+        /*if (data != null && index >= 0 && index <= size) {
+            Node<T> newNode = new Node<T>(data);
+            System.out.println("herere" + newNode.getData());
+            if (index == size && tail != null) {
+                //add to the back
+                tail.setNext(newNode);
+                newNode.setNext(null);
+                newNode.setPre(tail);
+                tail = newNode;
+                System.out.println("size is");
+            } else if (tail != null) {
+                Node<T> cur = getHead();
+                for (int i = 1; i< index; i++){
+                    //Node<T> temp = cur;
+                    cur = cur.getNext();
+                    //cur.setPre(temp);
+                }
+                System.out.println("locate"+cur.getPrev()+ "index");
+                newNode.setNext(cur);
+                newNode.setPre(cur.getPrev());
+                cur.setPre(newNode);
+                if (newNode.getPrev() == null) {
+                    head = newNode;
+                }
+                System.out.println(newNode.getNext().getData());
+            } else {
+                // when tail and head are null.The list is empty
+                newNode.setNext(null);
+                newNode.setPre(null);
+                head = newNode;
+                tail = head;
+                System.out.println("hh");
+            }
+            size++;
+            return true;
+        }
+        return false;*/
+    }
+    public boolean addFront(T data) {
+        if (data != null){
+            Node<T> newNode = new Node<T>(data);
+            newNode.setPre(null);
+            newNode.setNext(head);
+            head = newNode;
+            Node<T> second = head.getNext();
+            if (second == null) {
+                tail = head;
+            } else {
+                second.setPre(head);
+            }
+            return true;
+        }
+        return false;
+    }
+    public boolean addBack(T data) {
+        if (data != null){
+
+            /*  Node<T> temp = new Node<T>(data);
+                if (head == null) {
+                    head = temp;
+                    tail = head;
+                } else {
+                    tail.next = temp;
+                    tail = temp;
+                }*/
+
+            Node<T> newNode = new Node<T>(data);
+            newNode.setPre(tail);
+            newNode.setNext(null);
+            if (head == null){
+                head = newNode;
+                tail = head;
+            } else{
+                tail.setNext(newNode);
+                tail = newNode;
+            }
+            /*tail = newNode;
+            Node<T> pre = tail.getPrev();
+            if (pre == null) {
+                newNode = head;
+            } else {
+                pre.setNext(tail);
+            }*/
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public void clear() {
+        while (!isEmpty()) {
+            remove(0);
+        }
+        size = 0;
+    }
+    @Override
+    public boolean contains(Object o) {
+        @SuppressWarnings("unchecked")
+        T obj = (T) o;
+        return indexOf(obj) >= 0;
+    }
+    @Override
+    public T get(int index) {
+        if (index >= 0 && index < size - 1) {
+            return getNode(index).getData();
+        }
+        return null;
+    }
+    public Node<T> getNode(int index) {
+        if (index >= 0 && index < size - 1) {
+            Node<T> cur = getHead();
+            int i = 0;
+            while (cur.getNext() != null && i < index) {
+                cur = cur.getNext();
+            }
+            return cur;
+        }
+        return null;
+    }
+    @Override
+    public int indexOf(T data) {
+        if (data != null) {
+            Node<T> cur = getHead();
+            int i = 0;
+            while (cur.getNext() != null && !cur.getNext().equals(data)) {
+                cur = cur.getNext();
+                i++;
+            }
+            // if data is found in the list then i should less than size
+            if (i < size) {
+                return i;
+            } else {
+                return -1; // data not found
+            }
+        }
+        return -1; // data is null
+    }
+    @Override
+    public boolean isEmpty() {
+        return size == 0;
+    }
+    @Override
+    public T remove(Object o) {
+        if (o != null && contains(o)) {
+            @SuppressWarnings("unchecked")
+            T obj = (T) o;
+            return remove(indexOf(obj));
+        }
+        return null;
+    }
+    @Override
+    public T remove(int index) {
+        if (getNode(index) != null) {
+            size--;
+            Node<T> cur = getNode(index);
+            T result = cur.getData();
+            Node<T> next = cur.getNext();
+            Node<T> prev = cur.getPrev();
+            if (prev == null) {
+                // remove the head node
+                next.setPre(null);
+            } else if (next == null) {
+                // remove the tail node
+                prev.setNext(null);
+            } else {
+                // remove the middle node
+                prev.setNext(next);
+                next.setPre(prev);
+            }
+            return result;
+        }
+        return null;
+    }
+    @Override
+    public T replace(int index, T data) {
+        if (data != null) {
+            Node<T> cur = getHead();
+            int i = 0;
+            while (cur.getNext() != null && i < index) {
+                cur = cur.getNext();
+            }
+            T original = cur.getData();
+            cur.setData(data);
+            return original;
+        }
+        return null;
+    }
+    @Override
+    public int size() {
+        return size;
+    }
+    @Override
+    public Node<T> getHead() {
+        return head;
+    }
+    @Override
+    public void reverseList() {
+        // TODO
+    }
+    @Override
+    public Iterator<T> iterator() {
+        MyIterator<T> iterator = new MyIterator<>();
+        return iterator;
+    }
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer("[");
+        for (Node<T> node = head; node != null; node = node.getNext()) {
+            sb.append(node.getData() + " ");
+        }
+        return sb.toString() + "]";
+    }
+    public static void main(String[] args) {
+        DoublyLinkedList<String> list = new DoublyLinkedList<>();
+        for (int i = 0; i < 8; i++) {
+            list.addFront("" + i);
+        }
+        list.add(2, "9");
+        System.out.println("add to front" + list.toString());
+        Node<String> head = list.getHead();
+        Iterator<String> it = list.iterator();
+        while (it.hasNext()){
+            System.out.println(it.next());
+        }
+        DoublyLinkedList<String> list2 = new DoublyLinkedList<>();
+        for (int i = 0; i < 8; i++) {
+            list2.addBack("" + i);
+        }
+        // list2.add(3, "9");
+        System.out.println("add to Back" + list2.toString());
+    }
+}

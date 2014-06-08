@@ -1,0 +1,475 @@
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
+public class LinkedListTest {
+    DoublyLinkedList<String> array = new DoublyLinkedList<String>();
+
+    @Test
+    public void testAdd1() {
+        array.addFront("Zero"); // add front
+        array.addFront("Wongoo");
+        Object[] arr = array.toList();
+        assertEquals(array.remove(10),null);
+        assertEquals("Zero", arr[1]);
+        assertEquals("Wongoo", arr[0]);
+    }
+    @Test
+    public void testAdd21() { // add back
+        array.addBack("Zero");
+        array.addBack("Wongoo");
+        Object[] arr = array.toList();
+        assertEquals("Zero", arr[0]);
+        assertEquals("Wongoo", arr[1]);
+    }
+    @Test
+    public void testAdd3() { // out bound
+        array.add(2,"Zero");
+        array.add(1,"Wongoo");
+        Object[] arr = array.toList();
+        assertNull(arr);
+        assertNull(arr);
+    }
+    @Test
+    public void testAdd4() {
+        // test null
+        assertFalse(array.contains(null));
+        assertFalse(array.contains("asda"));
+        assertFalse(array.contains("Zero"));
+        assertEquals(array.indexOf("Zero"), -1);
+        assertEquals(array.indexOf("Won2goo"),-1);
+        assertEquals(array.indexOf("ongoo"), -1);
+        assertEquals(array.indexOf(null), -1);
+        assertEquals(array.get(0), null);
+        assertEquals(array.get(2), null);
+        assertEquals(array.get(-1), null);
+        assertEquals(array.get(99), null);
+        assertEquals(array.size(), 0);
+        assertTrue(array.isEmpty());
+
+
+        array.add(0,"Zero"); // contains, size, clear, isempty,indexOf,get
+        array.add(1,"Wongoo");
+        array.add(2,"Won2goo");
+        array.add(1,"Wo22222ngoo");
+
+        assertEquals(array.indexOf("Zero"), 0);
+        assertEquals(array.indexOf("Won2goo"),3);
+        assertEquals(array.indexOf("ongoo"), -1);
+        assertEquals(array.indexOf(null), -1);
+
+        assertEquals(array.get(0), "Zero");
+        assertEquals(array.get(2), "Wongoo");
+        assertEquals(array.get(-1), null);
+        assertEquals(array.get(99), null);
+
+        assertFalse(array.contains(null));
+        assertFalse(array.contains("asda"));
+        assertFalse(!array.contains("Zero"));
+        array.clear();
+        assertTrue(array.isEmpty());
+        assertEquals(0, array.size());
+        array.clear();
+    }
+    @Test
+    public void testAddBack() {
+        array.addBack("Zero");
+        array.addBack("Wongoo");
+        Object[] arr = array.toList();
+        assertEquals("Zero", arr[0]);
+        assertEquals("Wongoo", arr[1]);
+    }
+    @Test
+    public void testRemove1() {
+        array.clear();
+        array.addFront("Wongoo1");
+        array.addFront("Wongoo2");
+        array.addFront("Wongoo3");
+        array.addFront("Wongoo4");
+        assertEquals("Wongoo4",array.remove(0)); // remove front
+        assertEquals("Wongoo2",array.remove(1)); // remove middle
+        System.out.println("ater remove" + array.get(1));
+        System.out.println("ater remove" + array.getNode(1).getNext());
+        assertEquals("Wongoo1",array.remove(1)); // remove back
+        assertEquals("Wongoo3",array.remove(0)); // remove single
+        assertEquals(0,array.size());
+        //Object[] arr = array.toList();
+        //assertEquals("Wongoo", arr[0]);
+    }
+    @Test
+    public void testRemove2() {
+        array.addFront("Wongoo1");
+        array.addFront("Wongoo2");
+        array.addFront("Wongoo4");
+        array.addFront("Wongoo5");
+        array.addBack("Wongoo6");
+        array.addFront("Wongoo7");
+        array.addBack("Wongoo8");
+        array.remove(array.size()-1);
+        array.remove(0);
+        array.remove(array.size()-1);
+        array.remove(0);
+        Object[] arr = array.toList();
+        assertEquals("Wongoo4", arr[0]);
+        assertEquals("Wongoo2", arr[1]);
+        assertEquals("Wongoo1", arr[2]);
+        array.clear();
+        assertNull(array.toList());
+        array.addFront("Wongoo1");
+        array.addFront("Wongoo2");
+        array.addBack("Wongoo4");
+        array.addFront("Wongoo5");
+        array.addBack("Wongoo6");
+        array.addFront("Wongoo7");
+        array.addBack("Wongoo8");
+        array.remove(array.size());
+        array.remove(-1);
+        array.remove(array.size()+1);
+        array.remove(null);
+        Object[] arr2 = array.toList();
+        assertEquals("Wongoo2", arr2[0]);
+        assertEquals("Wongoo1", arr2[1]);
+        assertEquals("Wongoo4", arr2[2]);
+
+    }
+
+    public void testNull2() {
+        assertNull(array.toList());
+        assertEquals(null,array.remove(array.size() -1 ));
+        assertEquals(null,array.remove(0));
+        array.clear();
+    }
+    @Test (timeout = 200)
+    public void testAdd11(){
+        // add one item
+        array.addFront("what");
+        //  array.addFront("wht");
+        assertEquals("what",array.get(0));
+        assertEquals(array.indexOf("what"), 0);
+        assertEquals(array.indexOf("Won2goo"),-1);
+        assertEquals(array.indexOf("ongoo"), -1);
+        assertEquals(array.indexOf(null), -1);
+
+        assertEquals(array.get(0), "what");
+        assertEquals(array.get(2), null);
+        assertEquals(array.get(-1), null);
+        assertEquals(array.get(99), null);
+
+        assertFalse(array.contains(null));
+        assertFalse(array.contains("asda"));
+        assertFalse(!array.contains("what"));
+        array.clear();
+        assertTrue(array.isEmpty());
+        assertEquals(0, array.size());
+    }
+
+    @Test (timeout = 200)
+    public void testAdd12(){
+        array.addFront(new String("What"));
+        array.addFront(new String("What"));
+        assertEquals(new String("What"),array.get(1));
+    }
+
+    @Test (timeout = 200)
+    public void testAdd13(){
+        //add front
+        for(int i=0; i<15; i++){
+            array.addFront(""+i);
+        }
+        Object[] arr = array.toList();
+        assertTrue(arr.length>14);
+        String[] arr1 = new String[20];
+        array.clear();
+        for(int i =14; i>=0; i--){
+            array.addFront(new String(""+i));
+            arr1[i] = new String(""+i);
+        }
+
+        Object[] toArr = array.toList();
+        for(int i=0; i<array.size();i++){
+            assertEquals(toArr[i],arr1[i]);
+        }
+        array.clear();
+    }
+
+    @Test (timeout = 200)
+    public void testAdd14(){
+        //add back
+        String[] arr = new String[20];
+        for(int i=0; i<15; i++){
+            array.addBack(new String(""+i));
+            arr[i] = new String(""+i);
+        }
+        Object[] toArr = array.toList();
+        for(int i=0; i<array.size();i++){
+            assertEquals(toArr[i],arr[i]);
+        }
+    }
+    @Test (timeout = 200)
+    public void replace(){
+        //add back
+        String[] arr = new String[20];
+        for(int i=0; i<15; i++){
+            array.addBack(new String(""+i));
+            arr[i] = new String(""+i);
+        }
+        assertEquals(array.replace(14, "19"), "14");
+        assertEquals("19", array.get(14));
+        array.replace(-1, "19");
+        array.replace(16, "19");
+        array.replace(14, "14");
+        //Object[] toArr = array.toList();
+        for(int i=0; i<array.size();i++){
+            assertEquals(array.get(i),arr[i]);
+        }
+    }
+
+    /*@Test (timeout = 200)
+    public void testAdd1(){
+        array.add(new Thing("what"));
+        assertEquals(new Thing("what"),array.get(0));
+    }
+
+    @Test (timeout = 200)
+    public void testAdd2(){
+        array.add(new Thing("what"));
+        array.add(new Thing("What"));
+        assertEquals(new Thing("What"),array.get(1));
+    }
+
+    @Test (timeout = 200)
+    public void testAdd3(){
+        for(int i=0; i<15; i++){
+            array.add(new Thing(""+i));
+        }
+        Object[] arr = array.toArray();
+        assertTrue(arr.length>14);
+    }
+
+    @Test (timeout = 200)
+    public void testAdd4(){
+        Thing[] arr = new Thing[20];
+        for(int i=0; i<15; i++){
+            array.add(new Thing(""+i));
+            arr[i] = new Thing(""+i);
+        }
+        Object[] toArr = array.toArray();
+        for(int i=0; i<array.size();i++){
+            assertEquals(toArr[i],arr[i]);
+        }
+    }
+
+    @Test (timeout = 200)
+    public void testAddAll1(){
+        Collection<Thing> coll = new LinkedList<>();
+        Thing[] arr = new Thing[10];
+
+        for(int i=0; i<9; i++){
+            coll.add(new Thing(""+i));
+            arr[i] = new Thing(""+i);
+        }
+        array.addAll(coll);
+        assertArrayEquals(array.toArray(),arr);
+    }
+
+    @Test (timeout = 200)
+    public void testAddAll2(){
+        Collection<Thing> coll = new LinkedList<>();
+        Thing[] arr = new Thing[10];
+
+        array.add(new Thing("0"));
+        arr[0] = new Thing("0");
+
+        for(int i=0; i<8; i++){
+            coll.add(new Thing(""+i));
+            arr[i+1] = new Thing(""+i);
+        }
+        array.addAll(coll);
+        assertArrayEquals(array.toArray(),arr);
+    }
+
+    @Test (timeout = 200)
+    public void testAddAll3(){
+        Collection<Thing> coll = new LinkedList<>();
+
+        for(int i=0; i<15; i++){
+            coll.add(new Thing(""+i));
+        }
+        array.addAll(coll);
+        Object[] arr = array.toArray();
+        assertTrue(arr.length>14);
+    }
+
+    @Test (timeout = 200)
+    public void testRemove1(){
+        array.add(new Thing("all the small"));
+        array.remove(new Thing("all the small"));
+        assertTrue(array.size()==0);
+    }
+
+    @Test (timeout = 200)
+    public void testRemove2(){
+        array.add(new Thing("all the small",1));
+        Thing removed = array.remove(new Thing("all the small",2));
+        assertTrue(removed.number==1);
+    }
+
+    @Test (timeout = 200)
+    public void testRemove3(){
+        assertNull(array.remove(new Thing("always")));
+    }
+
+    @Test (timeout = 200)
+    public void testRemove4(){
+        Collection<Thing> coll = new LinkedList<>();
+        Thing[] arr = {new Thing("0"),new Thing("1"), new Thing("3"),new Thing("4"), null, null, null, null, null, null};
+
+        for(int i=0; i<5; i++){
+            coll.add(new Thing(""+i));
+        }
+        array.addAll(coll);
+        array.remove(new Thing("2"));
+        assertArrayEquals(array.toArray(),arr);
+    }
+
+    @Test (timeout = 200)
+    public void testRemove5(){
+        assertNull(array.remove(-1));
+        assertNull(array.remove(32));
+    }
+
+    @Test (timeout = 200)
+    public void testRemove6(){
+        array.add(new Thing("you'll be"));
+        assertEquals(array.remove(0), new Thing("you'll be"));
+    }
+
+    @Test (timeout = 200)
+    public void testRemove7(){
+        Collection<Thing> coll = new LinkedList<>();
+        Thing[] arr = {new Thing("0"),new Thing("1"), new Thing("3"),new Thing("4"), null, null, null, null, null, null};
+
+        for(int i=0; i<5; i++){
+            coll.add(new Thing(""+i));
+        }
+        array.addAll(coll);
+        array.remove(2);
+        assertArrayEquals(array.toArray(),arr);
+    }
+
+    @Test (timeout = 200)
+    public void testGet1(){
+        assertNull(array.get(-1));
+        assertNull(array.get(26));
+    }
+
+    @Test (timeout = 200)
+    public void testGet2(){
+        array.add(new Thing("blink"));
+        assertEquals(array.get(0),new Thing("blink"));
+        assertNull(array.get(1));
+    }
+
+    @Test (timeout = 200)
+    public void testGet3(){
+        for(int i=0; i<15; i++){
+            array.add(new Thing(""+i));
+        }
+        assertEquals(array.get(3),new Thing("3"));
+        assertEquals(array.get(11),new Thing("11"));
+    }
+
+    @Test (timeout = 200)
+    public void testContains1(){
+        assertFalse(array.contains(new Thing()));
+    }
+
+    @Test (timeout = 200)
+    public void testContains2(){
+        array.add(new Thing("what's"));
+        assertTrue(array.contains(new Thing("what's")));
+    }
+
+    @Test (timeout = 200)
+    public void testContains3(){
+        for(int i=0; i<15; i++){
+            array.add(new Thing(""+i));
+        }
+        assertTrue(array.contains(new Thing("3")));
+        assertTrue(array.contains(new Thing("12")));
+    }
+
+    @Test (timeout = 200)
+    public void testIsEmpty1(){
+        assertTrue(array.isEmpty());
+    }
+
+    @Test (timeout = 200)
+    public void testIsEmpty2(){
+        array.add(new Thing());
+        array.remove(new Thing());
+        assertTrue(array.isEmpty());
+    }
+
+    @Test (timeout = 200)
+    public void testClear1(){
+        Thing[] arr = new Thing[10];
+        array.add(new Thing());
+        array.add(new Thing());
+        array.add(new Thing());
+        array.clear();
+        assertArrayEquals(array.toArray(),arr);
+    }
+
+    @Test (timeout = 200)
+    public void testSize1(){
+        assertTrue(array.size()==0);
+    }
+
+    @Test (timeout = 200)
+    public void testSize2(){
+        array.add(new Thing());
+        assertTrue(array.size()==1);
+    }
+
+
+    @Test (timeout = 200)
+    public void testSize3(){
+        for(int i=0; i<15; i++){
+            array.add(new Thing());
+        }
+        assertTrue(array.size()==15);
+    }
+
+    @Test (timeout = 200)
+    public void testSize4(){
+        for(int i=0; i<15; i++){
+            array.add(new Thing());
+        }
+        array.clear();
+        assertTrue(array.size()==0);
+    }
+
+    private class Thing{
+        public String name;
+        public int number;
+
+        public Thing(){
+            this("What",0);
+        }
+        public Thing(String name){
+            this(name,0);
+        }
+        public Thing(String name,int number){
+            this.name = name;
+            this.number = number;
+        }
+
+        @Override
+        public boolean equals(Object o){
+            return name.equals(((Thing)o).name);
+        }*/
+}
+

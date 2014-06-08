@@ -1,0 +1,254 @@
+import java.util.ArrayList;
+import java.util.Random;
+public class Sorting implements SortingInterface {
+    @Override
+    public <T extends Comparable<T>> void bubblesort(T[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length - i - 1; j++) {
+                if (arr[j].compareTo(arr[j + 1]) > 0) {
+                    T temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+        System.out.println("after bubble sort");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    @Override
+    public <T extends Comparable<T>> void insertionsort(T[] arr) {
+        System.out.println("Before sorting");
+        System.out.println(arr.toString());
+        for (int i = 1; i < arr.length; i++) {
+            T toBeSort = arr[i];
+            int j = i;
+            while (j > 0 && arr[j - 1].compareTo(toBeSort) > 0) {
+                arr[j] = arr[j - 1];
+                j--;
+            }
+            arr[j] = toBeSort;
+        }
+        System.out.println("insertion sort");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    @Override
+    public <T extends Comparable<T>> void selectionsort(T[] arr) {
+        System.out.println("Before sorting");
+        System.out.println(arr.toString());
+        for (int i = 0; i < arr.length - 1; i++) {
+            int indexOfSmallest = i;
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[indexOfSmallest].compareTo(arr[j]) > 0) {
+                    indexOfSmallest = j;
+                }
+            }
+            T temp = arr[indexOfSmallest];
+            arr[indexOfSmallest] = arr[i];
+            arr[i] = temp;
+        }
+        System.out.println("selection sort");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    @Override
+    public <T extends Comparable<T>> void quicksort(T[] arr, Random r) {
+        if (arr == null || arr.length == 0) {
+            return;
+        }
+        quicksortHelper(arr, r, 0, arr.length - 1);
+        System.out.println("quick sort");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
+        }
+    }
+    private <T extends Comparable<T>> void quicksortHelper(T[] arr, Random r,
+            int low, int high) {
+        int i = low, j = high;
+        int pivotIndex = r.nextInt(j - i) + i;
+        boolean done = false;
+        // Divide into two lists
+        while (!done) {
+            // If the current value from the left list is smaller then the pivot
+            // element then get the next element from the left list
+            while (arr[i].compareTo(arr[pivotIndex]) < 0) {
+                i++;
+            }
+            // If the current value from the right list is larger then the pivot
+            // element then get the next element from the right list
+            while (arr[i].compareTo(arr[pivotIndex]) > 0) {
+                j--;
+            }
+            // If we have found a values in the left list which is larger then
+            // the pivot element and if we have found a value in the right list
+            // which is smaller then the pivot element then we exchange the
+            // values.
+            // As we are done we can increase i and j
+            if (i <= j) {
+                T temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+                i++;
+                j--;
+            } else {
+                done = true;
+            }
+            // Recursion
+            if (low < j) {
+                quicksortHelper(arr, r, low, j);
+            }
+            if (i < high) {
+                quicksortHelper(arr, r, i, high);
+            }
+        }
+    }
+    @SuppressWarnings({ "null", "unchecked" })
+    @Override
+    public <T extends Comparable<T>> T[] mergesort(T[] arr) {
+        if (arr.length > 1) {
+            int mid = arr.length / 2;
+            T[] leftArray = (T[]) new Comparable[mid];
+            T[] rightArray = (T[]) new Comparable[arr.length - mid];
+            for (int i = 0; i < mid; i++) {
+                leftArray[i] = arr[i];
+            }
+            for (int j = mid; j < arr.length; j++) {
+                rightArray[j - mid] = arr[j];
+            }
+            System.out.println("left array");
+            for (int i = 0; i < leftArray.length; i++) {
+                System.out.println(leftArray[i ] + " ");
+            }
+            System.out.println("right array");
+            for (int j = 0; j < rightArray.length; j++) {
+                System.out.println(rightArray[j] + " ");
+            }
+            // divide
+            mergesort(leftArray);
+            mergesort(rightArray);
+            // merge
+            arr = merge(leftArray, rightArray);
+            System.out.println("after merge sort");
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i] + " ");
+            }
+        }
+        return null;
+    }
+    private <T extends Comparable<T>> T[] merge(T[] a, T[] b) {
+        System.out.println("left array");
+        for (int j = 0; j < a.length; j++) {
+            System.out.print(a[j] + " ");
+        }
+        System.out.println("right array");
+        for (int j = 0; j < b.length; j++) {
+            System.out.print(b[j] + " ");
+        }
+        int totLength = a.length + b.length;
+        @SuppressWarnings("unchecked")
+        T[] mergedArray = (T[]) new Comparable[totLength];
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        // One of a or b will be running out of element during the comparison
+        // process.
+        while (i < a.length && j < b.length) {
+            if (a[i].compareTo(b[j]) < 0) {
+                mergedArray[k] = a[i];
+                k++;
+                i++;
+            } else {
+                mergedArray[k] = b[j];
+                k++;
+                j++;
+            }
+        }
+        // System.out.println(i + "length i j" + j);
+        // copying the rest of b into mergedArray
+        if (i >= a.length) {
+            for (int o = 0; o < b.length - j; o++) {
+                mergedArray[o + k] = b[o + j];
+            }
+        } else {
+            // copying the rest of a into mergedArray
+            for (int o = 0; o < a.length - i; o++) {
+                mergedArray[o + k] = a[o + i];
+            }
+        }
+        return mergedArray;
+    }
+    @Override
+    public int[] radixsort(int[] arr) {
+        int maxDigitLenth = findMaxDigit(arr);
+        if (maxDigitLenth != -1) {
+            int exp = 1;// 10^0;
+            for (int i = 0; i < maxDigitLenth; i++) {
+                @SuppressWarnings("unchecked")
+                ArrayList<Integer> bucketList[] = new ArrayList[10];
+                for (int k = 0; k < 10; k++) {
+                    bucketList[k] = new ArrayList<Integer>();
+                }
+                for (int j = 0; j < arr.length; j++) {
+                    int hashNum = (arr[j] / exp) % 10;
+                    bucketList[hashNum].add(arr[j]);
+                }
+                exp *= 10;
+                int index = 0;
+                // update the arr
+                for (int k = 0; k < 10; k++) {
+                    for (Integer num : bucketList[k]) {
+                        arr[index] = num;
+                        index++;
+                    }
+                }
+            }
+            System.out.println("radix sort");
+            for (int i = 0; i < arr.length; i++) {
+                System.out.print(arr[i] + " ");
+            }
+            return arr;
+        } else {
+            return null;
+        }
+    }
+    private int findMaxDigit(int[] arr) {
+        if (arr.length <= 0) {
+            int max = arr[0];
+            for (int i = 1; i < arr.length; i++) {
+                if (arr[i] > max) {
+                    max = arr[i];
+                }
+            }
+            int divisor = 1;
+            int digitLength = 0;
+            boolean done = false;
+            while (!done) {
+                if (max / divisor > 0) {
+                    digitLength++;
+                    divisor *= 10;
+                } else {
+                    done = true;
+                }
+            }
+            return digitLength;
+        } else {
+            return -1;
+        }
+    }
+    public static void main(String[] args) {
+        Sorting s = new Sorting();
+        Random r = new Random();
+        Integer arr[] = { 9, 4, 2, 1, 6, 8, 2, 5, 3, 0, 7 };
+        int arr1[] = { 9, 4, 2, 1, 6, 8, 2, 5, 3, 0, 7 };
+        // s.bubblesort(arr);
+        // s.insertionsort(arr);
+        // s.selectionsort(arr);
+        //s.mergesort(arr);
+        //s.quicksort(arr, r);
+        // s.radixsort(arr1);
+    }
+}
